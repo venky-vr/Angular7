@@ -1,0 +1,109 @@
+<form [formGroup]="employeeForm" (ngSubmit)="onSubmit()" class="form-horizontal">
+    <div class="panel panel-primary">
+        <div class="panel-heading text-center">
+            <h2 class="panel-title">Create Employee</h2>
+        </div>
+        <div class="panel-body">
+            <div class="form-group" [ngClass]="{'has-error': formErrors.fullName}">
+                <label class="col-sm-2 control-label" for="fullName">Full Name:</label>
+                <div class="col-sm-10">
+                    <input type="text" id="fullName" class="form-control" formControlName="fullName" (blur)="logkeyValidationErrors()"/>
+                    <span class="help-block" *ngIf="formErrors.fullName">
+                        {{formErrors.fullName}}
+                    </span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label" for="contactPreference">Contact Preference</label>
+                <label class="radio-inline">
+                    <input type="radio" id="contactPreference" value="email" formControlName="contactPreference"/>Email
+                </label>
+                <label class="radio-inline">
+                    <input type="radio" id="contactPreference" value="phone" formControlName="contactPreference"/>Phone
+                </label>
+               
+            </div>
+            <div class="form-group" [ngClass]="{'has-error': formErrors.email}">
+                <label class="col-sm-2 control-label" for="email">Email:</label>
+                <div class="col-sm-10">
+                    <input type="text" id="email" class="form-control" formControlName="email" (blur)="logkeyValidationErrors()"/>
+                    <span class="help-block" *ngIf="formErrors.email">
+                        {{formErrors.email}}
+                    </span>
+                </div>
+            </div>
+            <div class="form-group" [ngClass]="{'has-error': formErrors.phone}">
+                <label class="col-sm-2 control-label" for="phone">Phone:</label>
+                <div class="col-sm-10">
+                    <input type="text" id="phone" class="form-control" formControlName="phone" (blur)="logkeyValidationErrors()"/>
+                    <span class="help-block" *ngIf="formErrors.phone">
+                        {{formErrors.phone}}
+                    </span>
+                </div>
+            </div>
+            <div formGroupName="skills">
+                <div class="form-group">
+                    <label class="col-sm-2 control-label" for="skillName">Skills</label>
+                    <div class="col-sm-5">
+                        <input type="text" class="form-control" id="skillName" placeholder="skill name" formControlName="skillName"/>
+                    </div>
+                    <div class="col-sm-5">
+                        <input type="text" class="form-control" placeholder="experience in Year" formControlName="experienceInYear"/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label" for="proficiency">Proficiency</label>
+                    <label class="radio-inline">
+                        <input type="radio" id="proficiency" value="beginner" formControlName="proficiency"/>Beginner
+                    </label>
+                    <label class="radio-inline">
+                        <input type="radio" id="proficiency" value="intermediate" formControlName="proficiency"/>Intermediate
+                    </label>
+                    <label class="radio-inline">
+                        <input type="radio" id="proficiency" value="advance" formControlName="proficiency"/>Advane
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="panel-footer">
+            <div class="btn-toolbar">
+            <button type="submit" class="btn btn-primary">Save</button>
+            <button type="submit" class="btn btn-primary" (click)="onDataLoad()">Data Load</button>
+            </div>
+        </div>
+    </div>
+</form>
+
+<div class="clearfix"></div>
+
+<!-- to get the data inside of the table-->
+
+<table class="table table-bordered bg bg-success">
+    <thead>
+        <tr>
+            <th>FormGroup</th>
+            <th>FromControl (fullName)</th>
+            <th>FromControl (email)</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><b>Dirty:</b> {{employeeForm.dirty}}<br/>
+     
+            <b>Touched:</b> {{employeeForm.touched}}<br/>
+            <b>InValid:</b> {{employeeForm.InValid}}<br/>
+            <b>Form values:</b> {{employeeForm.value | json}}</td>
+        
+            <td>
+                    <b>dirty:</b> {{employeeForm.get('fullName').dirty}}<br/>
+                    <b>Touched:</b> {{employeeForm.get('fullName').touched}}<br/>
+                    <b>fullName:</b> {{employeeForm.get('fullName').value}}<br/>
+            </td>
+            <td>
+                <b>Email:</b>{{employeeForm.get('email').dirty}}<br/>
+                <b>Email:</b>{{employeeForm.get('email').touched}}<br/>
+                <b>Email:</b>{{employeeForm.get('email').value}}
+            </td>
+        </tr>
+    </tbody>
+</table>

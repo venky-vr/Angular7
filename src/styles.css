@@ -1,0 +1,10 @@
+body{
+    background: lightgray !important;
+}
+html,body{
+    height: 100%;
+}
+.container{
+    min-height: 100%;
+    background: #9c9c9c;
+}
